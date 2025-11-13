@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="hr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fun Facts — Kinesiology is Science</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts za moderniji izgled -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0f1724;
+      --text: #e6eef8;
+      --accent: #4ade80;
+      --card-bg: #1e293b;
+      --shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg) 0%, #1a2332 100%);
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+      letter-spacing: 1px;
+    }
+
+    .facts-container {
+      display: grid;
+      gap: 1.5rem;
+      max-width: 800px;
+      width: 100%;
+      margin: 2rem auto;
+    }
+
+    .fact-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 1.8rem;
+      box-shadow: var(--shadow);
+      text-align: left;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-left: 5px solid var(--accent);
+    }
+
+    .fact-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 28px rgba(74, 222, 128, 0.2);
+    }
+
+    .fact-card h3 {
+      margin: 0 0 0.8rem;
+      color: var(--accent);
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .fact-card p {
+      margin: 0;
+      line-height: 1.6;
+      font-size: 1rem;
+      color: #cbd5e1;
+    }
+
+    .fact-card .emoji {
+      font-size: 1.8rem;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+
+    a.back {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 3rem;
+      display: inline-flex;
+      align-items: center;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
+
+    a.back:hover {
+      color: var(--accent);
+    }
+
+    a.back::before {
+      content: "←";
+      margin-right: 0.5rem;
+      font-weight: bold;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      h1 { font-size: 2.2rem; }
+      .fact-card { padding: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Zanimljivosti o tijelu i kineziologiji</h1>
+
+  <div class="facts-container">
+    <!-- Činjenica 1 -->
+    <div class="fact-card">
+      <h3><span class="emoji">🦴</span> Kosti nisu mrtve!</h3>
+      <p>Kosti su živo tkivo koje se neprestano obnavlja – svake godine oko 10 % kostiju u tijelu zamijeni se novim! Zato je važno vježbati s opterećenjem kako bi potaknuli njihovu regeneraciju.</p>
+    </div>
+
+    <!-- Činjenica 2 -->
+    <div class="fact-card">
+      <h3><span class="emoji">💪</span> Mišići "pamte"</h3>
+      <p>Nakon što ste bili u formi, a zatim prestali vježbati – mišići zadržavaju "mišićnu memoriju". Kada se vratite treninzima, brže ćete vratiti snagu nego što ste je izgradili prvi put!</p>
+    </div>
+
+    <!-- Činjenica 3 -->
+    <div class="fact-card">
+      <h3><span class="emoji">🧠</span> Mozak voli kretanje</h3>
+      <p>Vježbanje povećava razinu BDNF-a (brain-derived neurotrophic factor), proteina koji djeluje kao "gnojivo za mozak" – pomaže stvaranju novih neurona i poboljšava pamćenje.</p>
+    </div>
+
+    <!-- Činjenica 4 -->
+    <div class="fact-card">
+      <h3><span class="emoji">❤️</span> Srce je najjači mišić</h3>
+      <p>Srce kuca oko 100.000 puta dnevno i pumpa preko 7.500 litara krvi! Tijekom života pređe put jednak udaljenosti do Mjeseca – i natrag.</p>
+    </div>
+
+    <!-- Činjenica 5 -->
+    <div class="fact-card">
+      <h3><span class="emoji">🏃‍♂️</span> Trčanje mijenja mozak</h3>
+      <p>Redovito trčanje povećava volumen hipokampusa (dijela mozga za pamćenje) i poboljšava prostornu orijentaciju – doslovno postajete bolji u snalaženju u prostoru!</p>
+    </div>
+
+    <!-- Činjenica 6 -->
+    <div class="fact-card">
+      <h3><span class="emoji">😴</span> Vježbanje poboljšava san</h3>
+      <p>Ljudi koji vježbaju barem 150 minuta tjedno spavaju bolje i brže utonu u duboki san. Ali – nemojte vježbati kasno navečer, može poremetiti cirkadijalni ritam!</p>
+    </div>
+  </div>
+
+  <a href="landing.html" class="back">Povratak na početnu</a>
+</body>
+</html>

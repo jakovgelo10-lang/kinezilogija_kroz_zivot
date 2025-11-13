@@ -1,0 +1,93 @@
+/* Opći stilovi za sve stranice */
+body {
+  background-color: #0f1724;
+  color: #e6eef8;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+  margin: 0;
+}
+
+/* Naslovi */
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 1.8em;
+  margin-bottom: 10px;
+}
+
+/* Paragrafi */
+p {
+  font-size: 1.2em;
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+}
+
+/* Navigacija / linkovi */
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #0f1724;
+  background-color: #e6eef8;
+  padding: 15px 25px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1.1em;
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+.menu a:hover {
+  background-color: #c0d8ff;
+  transform: scale(1.05);
+}
+
+/* Linkovi za povratak */
+a {
+  color: #e6eef8;
+  text-decoration: underline;
+  display: block;
+  margin-top: 20px;
+}
+
+/* Dugmad (za kviz) */
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  border: none;
+  background-color: #e6eef8;
+  color: #0f1724;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #c0d8ff;
+  transform: scale(1.05);
+}
+
+/* SVG animacije */
+svg {
+  margin-top: 20px;
+}
+
+/* Animacije skleka i čučnja */
+.pushup-body { transform-origin: 50% 50%; animation: pushup 1.2s ease-in-out infinite; }
+.pushup-arm-left { transform-origin: top left; animation: armMove 1.2s ease-in-out infinite; }
+.pushup-arm-right { transform-origin: top right; animation: armMove 1.2s ease-in-out infinite; }
+.squat-body { transform-origin: 50% 20%; animation: squat 1.2s ease-in-out infinite; }
+
+@keyframes pushup { 0%,100%{transform:translateY(0);}50%{transform:translateY(15px);} }
+@keyframes armMove { 0%,100%{transform:rotate(0deg);}50%{transform:rotate(-30deg);} }
+@keyframes squat { 0%,100%{transform:translateY(0);}50%{transform:translateY(20px);} }

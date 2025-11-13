@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vježbe - Kinesiology is Science</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f1724;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --text: #e6eef8;
+            --accent: #4ade80;
+            --danger: #f87171;
+            --shadow: 0 8px 32px rgba(0,0,0,0.3);
+            --border: #60a5fa;
+        }
+        [data-theme="light"] {
+            --bg: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text: #1e293b;
+            --accent: #22c55e;
+            --danger: #ef4444;
+            --shadow: 0 8px 32px rgba(0,0,0,0.1);
+            --border: #3b82f6;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 30px 20px;
+            transition: background 0.5s ease;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .back-btn {
+            background: #9ca3af;
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: 0.3s;
+        }
+        .back-btn:hover {
+            background: #6b7280;
+            transform: translateY(-2px);
+        }
+        h1 {
+            font-size: 2.4em;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .theme-toggle {
+            background: #fbbf24;
+            color: #000;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .theme-toggle:hover { background: #f59e0b; }
+
+        .controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .add-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .add-btn:hover {
+            background: #2563eb;
+            transform: scale(1.05);
+        }
+
+        .timer {
+            margin: 25px auto;
+            padding: 16px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            font-size: 1.9em;
+            font-weight: bold;
+            max-width: 200px;
+            display: none;
+            border: 2px dashed var(--accent);
+            animation: pulse 1.2s infinite;
+        }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+        .exercise {
+            background: rgba(255, 255, 255, 0.12);
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 14px;
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--accent);
+        }
+        .exercise:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .exercise h3 {
+            font-size: 1.5em;
+            margin: 0 0 12px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .remove-exercise {
+            background: var(--danger);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 1em;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .remove-exercise:hover { background: #dc2626; transform: scale(1.1); }
+
+        .set-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-size: 0.9em;
+        }
+        .set-btn {
+            background: rgba(255,255,255,0.2);
+            color: var(--text);
+            border: none;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: 0.3s;
+        }
+        .set-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .sets {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+        .set {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px 18px;
+            border-radius: 10px;
+            min-width: 90px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        .set input[type="checkbox"] {
+            transform: scale(1.5);
+            margin-right: 8px;
+            cursor: pointer;
+        }
+        .set label {
+            cursor: pointer;
+            user-select: none;
+        }
+        .completed {
+            background: var(--accent) !important;
+            animation: celebrate 0.6s;
+        }
+        @keyframes celebrate {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.12); }
+            100% { transform: scale(1); }
+        }
+
+        .info {
+            font-style: italic;
+            opacity: 0.85;
+            font-size: 0.9em;
+            margin-top: 4px;
+        }
+
+        .success {
+            margin: 40px 0;
+            padding: 22px;
+            background: var(--accent);
+            color: white;
+            border-radius: 14px;
+            font-size: 1.8em;
+            font-weight: bold;
+            display: none;
+            animation: fadeInUp 1s forwards;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reset-btn {
+            display: block;
+            margin: 30px auto 0;
+            padding: 14px 32px;
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .reset-btn:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: var(--card-bg);
+            padding: 28px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow);
+        }
+        .modal h2 {
+            margin-bottom: 20px;
+            font-size: 1.6em;
+        }
+        .modal input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+        }
+        .modal button {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .modal .add-btn { background: #22c55e; color: white; }
+        .modal .add-btn:hover { background: #16a34a; }
+        .modal .close-btn { background: #ef4444; color: white; }
+        .modal .close-btn:hover { background: #dc2626; }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <div class="container">
+        <div class="header">
+            <a href="landing.html" class="back-btn">Početna</a>
+            <h1>Vježbe</h1>
+            <button class="theme-toggle" onclick="toggleTheme()">Svijetli način</button>
+        </div>
+
+        <div class="controls">
+            <button class="add-btn" onclick="openModal()">+ Dodaj vježbu</button>
+        </div>
+
+        <!-- Timer -->
+        <div id="timer" class="timer">00:30</div>
+
+        <!-- Vježbe -->
+        <div id="exercises"></div>
+
+        <!-- Uspjeh -->
+        <div id="success" class="success">
+            ČESTITAMO! Završio si cijeli trening!
+        </div>
+
+        <!-- Reset -->
+        <button class="reset-btn" onclick="resetWorkout()">Resetiraj trening</button>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2>Dodaj vježbu</h2>
+            <input type="text" id="exercise-name" placeholder="Ime vježbe (npr. Zgibovi)">
+            <input type="number" id="exercise-reps" placeholder="Ponavljanja (npr. 10)" min="1">
+            <input type="number" id="exercise-sets" placeholder="Početni broj serija" min="1" value="3">
+            <input type="number" id="rest-time" placeholder="Odmor između serija (sekundi)" min="10" value="30">
+            <button class="add-btn" onclick="addExercise()">Dodaj vježbu</button>
+            <button class="close-btn" onclick="closeModal()">Odustani</button>
+        </div>
+    </div>
+
+    <!-- Zvuk -->
+    <audio id="beep" src="data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU" preload="auto"></audio>
+
+    <script>
+        const defaultExercises = [
+            { name: "Sklekovi", reps: 10, sets: 3 },
+            { name: "Čučnjevi", reps: 15, sets: 3 },
+            { name: "Plank", reps: 30, sets: 3, unit: "sekundi" },
+            { name: "Trbušnjaci", reps: 20, sets: 3 }
+        ];
+
+        let exercises = JSON.parse(localStorage.getItem('exercises_vjezbe')) || defaultExercises;
+        let timerInterval = null;
+        const beep = document.getElementById('beep');
+
+        function saveExercises() {
+            localStorage.setItem('exercises_vjezbe', JSON.stringify(exercises));
+        }
+
+        function renderExercises() {
+            const container = document.getElementById('exercises');
+            container.innerHTML = '';
+            exercises.forEach((ex, index) => {
+                const div = document.createElement('div');
+                div.className = 'exercise';
+                div.innerHTML = `
+                    <h3>
+                        ${ex.name}
+                        <button class="remove-exercise" onclick="removeExercise(${index})">×</button>
+                    </h3>
+                    <div class="set-controls">
+                        <button class="set-btn" onclick="changeSets(${index}, -1)">−</button>
+                        <span><strong>${ex.sets}</strong> serija</span>
+                        <button class="set-btn" onclick="changeSets(${index}, 1)">+</button>
+                    </div>
+                    <div class="sets">
+                        ${Array.from({length: ex.sets}, (_, i) => `
+                            <div class="set">
+                                <input type="checkbox" id="vjezba-${index}-${i+1}" onchange="onCheck(${index}, this)">
+                                <label for="vjezba-${index}-${i+1}">${i+1}. serija</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <p class="info">${ex.reps} ${ex.unit || 'ponavljanja'} po seriji</p>
+                `;
+                container.appendChild(div);
+            });
+            loadCheckboxes();
+            checkProgress();
+        }
+
+        function changeSets(index, delta) {
+            const newSets = exercises[index].sets + delta;
+            if (newSets < 1) return;
+            exercises[index].sets = newSets;
+            saveExercises();
+            renderExercises();
+        }
+
+        function onCheck(exIndex, checkbox) {
+            const id = checkbox.id;
+            if (checkbox.checked) {
+                checkbox.parentElement.classList.add('completed');
+                localStorage.setItem(id, 'true');
+                const rest = exercises[exIndex].rest || 30;
+                startRestTimer(rest);
+            } else {
+                localStorage.removeItem(id);
+            }
+            checkProgress();
+        }
+
+        function loadCheckboxes() {
+            document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                if (localStorage.getItem(cb.id) === 'true') {
+                    cb.checked = true;
+                    cb.parentElement.classList.add('completed');
+                }
+            });
+        }
+
+        function checkProgress() {
+            const all = document.querySelectorAll('input[type="checkbox"]');
+            const checked = document.querySelectorAll('input[type="checkbox"]:checked');
+            document.getElementById('success').style.display = 
+                all.length === checked.length && all.length > 0 ? 'block' : 'none';
+        }
+
+        function startRestTimer(seconds) {
+            if (timerInterval) clearInterval(timerInterval);
+            const timerEl = document.getElementById('timer');
+            timerEl.style.display = 'block';
+            let timeLeft = seconds;
+            timerEl.textContent = formatTime(timeLeft);
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                timerEl.textContent = formatTime(timeLeft);
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerEl.style.display = 'none';
+                    beep.play();
+                }
+            }, 1000);
+        }
+
+        function formatTime(sec) {
+            const m = String(Math.floor(sec / 60)).padStart(2, '0');
+            const s = String(sec % 60).padStart(2, '0');
+            return `${m}:${s}`;
+        }
+
+        function openModal() { document.getElementById('modal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('modal').style.display = 'none'; }
+
+        function addExercise() {
+            const name = document.getElementById('exercise-name').value.trim();
+            const reps = parseInt(document.getElementById('exercise-reps').value);
+            const sets = parseInt(document.getElementById('exercise-sets').value);
+            const rest = parseInt(document.getElementById('rest-time').value);
+
+            if (!name || isNaN(reps) || isNaN(sets)) {
+                alert("Popuni sva polja!");
+                return;
+            }
+
+            exercises.push({ 
+                name, reps, sets, rest: rest || 30, 
+                unit: reps === 1 ? "ponavljanje" : "ponavljanja" 
+            });
+            saveExercises();
+            closeModal();
+            renderExercises();
+            // Reset forme
+            document.getElementById('exercise-name').value = '';
+            document.getElementById('exercise-reps').value = '';
+            document.getElementById('exercise-sets').value = '3';
+            document.getElementById('rest-time').value = '30';
+        }
+
+        function removeExercise(index) {
+            if (confirm(`Ukloniti vježbu "${exercises[index].name}"?`)) {
+                exercises.splice(index, 1);
+                saveExercises();
+                renderExercises();
+            }
+        }
+
+        function resetWorkout() {
+            if (confirm("Resetirati cijeli trening?")) {
+                localStorage.removeItem('exercises_vjezbe');
+                Object.keys(localStorage).forEach(key => {
+                    if (key.startsWith('vjezba-')) localStorage.removeItem(key);
+                });
+                location.reload();
+            }
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const isLight = body.getAttribute('data-theme') === 'light';
+            const newTheme = isLight ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+            document.querySelector('.theme-toggle').textContent = 
+                newTheme === 'light' ? 'Tamni način' : 'Svijetli način';
+            localStorage.setItem('theme_vjezbe', newTheme);
+        }
+
+        window.onload = function() {
+            const savedTheme = localStorage.getItem('theme_vjezbe') || 'dark';
+            document.body.setAttribute('data-theme', savedTheme);
+            document.querySelector('.theme-toggle').textContent = 
+                savedTheme === 'light' ? 'Tamni način' : 'Svijetli način';
+            renderExercises();
+        };
+    </script>
+</body>
+</html>

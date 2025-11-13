@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="hr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kviz o vježbama</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Kviz o vježbama</h1>
+    <div id="quiz"></div>
+    <button id="nextBtn" onclick="nextQuestion()">Sljedeće pitanje</button>
+    <p id="score"></p>
+    <a href="index.html" class="back">← Povratak na kategorije</a>
+  </div>
+
+  <script>
+    const questions = [
+      {q: "Koja vježba najviše aktivira kvadricepse?", options: ["Čučanj", "Sklek", "Zgib"], answer: 0},
+      {q: "Koja vježba jača leđa?", options: ["Zgib", "Trbušnjaci", "Sklek"], answer: 0},
+      {q: "Koja vježba razvija prsa?", options: ["Sklek", "Most", "Iskorak"], answer: 0},
+      {q: "Koja vježba se izvodi ležeći na leđima?", options: ["Trbušnjaci", "Zgib", "Iskorak"], answer: 0},
+      {q: "Koja vježba najviše aktivira stražnjicu?", options: ["Most", "Sklek", "Zgib"], answer: 0}
+    ];
+
+    let current = 0, score = 0;
+    const quiz = document.getElementById("quiz");
+    const nextBtn = document.getElementById("nextBtn");
+    const scoreDisplay = document.getElementById("score");
+
+    function showQuestion() {
+      const q = questions[current];
+      quiz.innerHTML = `<p>${current+1}. ${q.q}</p>${q.options.map((opt,i)=>`<button onclick="checkAnswer(${i})">${opt}</button>`).join("")}`;
+      nextBtn.style.display = "none";
+    }
+
+    function checkAnswer(i) {
+      const q = questions[current];
+      const buttons = quiz.querySelectorAll("button");
+      buttons.forEach(b => b.disabled = true);
+      if (i === q.answer) {
+        quiz.innerHTML += `<p class='correct'>✅ Točno!</p>`;
+        score++;
+      } else {
+        quiz.innerHTML += `<p class='incorrect'>❌ Netočno! Točan odgovor: ${q.options[q.answer]}</p>`;
+      }
+      nextBtn.style.display = "block";
+    }
+
+    function nextQuestion() {
+      current++;
+      if (current < questions.length) showQuestion();
+      else {
+        quiz.innerHTML = "<h2>Kraj kviza!</h2>";
+        scoreDisplay.textContent = `Tvoj rezultat: ${score}/${questions.length}`;
+        nextBtn.style.display = "none";
+      }
+    }
+
+    showQuestion();
+  </script>
+</body>
+</html>
