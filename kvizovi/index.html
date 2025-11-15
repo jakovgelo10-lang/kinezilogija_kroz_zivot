@@ -5,67 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Odaberi kviz — Kinesiology is Science</title>
   <link rel="stylesheet" href="../style.css">
-  <style>
-    body {
-      background-color: #0f1724;
-      color: #e6eef8;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-    .container {
-      background: #1b2432;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-      max-width: 500px;
-      width: 90%;
-    }
-    h1 {
-      color: #9cc9ff;
-    }
-    .quiz-links {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      margin-top: 20px;
-    }
-    a {
-      background-color: #e6eef8;
-      color: #0f1724;
-      text-decoration: none;
-      padding: 12px;
-      border-radius: 10px;
-      font-weight: bold;
-      transition: transform 0.2s, background-color 0.3s;
-    }
-    a:hover {
-      background-color: #c0d8ff;
-      transform: scale(1.05);
-    }
-    .back {
-      display: inline-block;
-      margin-top: 20px;
-      color: #9cc9ff;
-      text-decoration: none;
-    }
-  </style>
 </head>
-
 <body>
+
   <div class="container">
     <h1>Odaberi kategoriju kviza</h1>
-    <div class="quiz-links">
-      <a href="misici.html">🦾 Kviz o mišićima</a>
-      <a href="vjezbe.html">🏋️ Kviz o vježbama</a>
-      <a href="tijelo.html">🧍 Kviz o ljudskom tijelu</a>
+    <p>Izaberi jednu od tema i testiraj svoje znanje o kineziologiji!</p>
+
+    <div class="menu quiz-menu">
+      <a href="misici.html">
+        <i class="fas fa-dumbbell"></i> Kviz o mišićima
+      </a>
+      <a href="vjezbe.html">
+        <i class="fas fa-running"></i> Kviz o vježbama
+      </a>
+      <a href="tijelo.html">
+        <i class="fas fa-user"></i> Kviz o ljudskom tijelu
+      </a>
     </div>
-    <a href="../landing.html" class="back">← Povratak na početnu</a>
+    <a href="../landing.html" class="back-link">
+  Povratak na početnu
+</a>
   </div>
+
 </body>
 </html>
+  
