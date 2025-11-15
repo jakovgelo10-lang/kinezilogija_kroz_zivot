@@ -4,25 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vježbe - Kinesiology is Science</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0f1724;
-            --card-bg: rgba(255, 255, 255, 0.1);
-            --text: #e6eef8;
-            --accent: #4ade80;
+            --bg: #0a0e17;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent: #22d3ee;
+            --accent-hover: #06b6d4;
             --danger: #f87171;
-            --shadow: 0 8px 32px rgba(0,0,0,0.3);
-            --border: #60a5fa;
+            --danger-hover: #ef4444;
+            --shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+            --border: rgba(255, 255, 255, 0.12);
+            --border-accent: rgba(34, 211, 238, 0.3);
         }
         [data-theme="light"] {
-            --bg: #f8fafc;
-            --card-bg: rgba(255, 255, 255, 0.9);
+            --bg: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.95);
             --text: #1e293b;
-            --accent: #22c55e;
+            --text-muted: #64748b;
+            --accent: #06b6d4;
+            --accent-hover: #0891b2;
             --danger: #ef4444;
-            --shadow: 0 8px 32px rgba(0,0,0,0.1);
-            --border: #3b82f6;
+            --danger-hover: #dc2626;
+            --shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+            --border: rgba(0, 0, 0, 0.1);
+            --border-accent: rgba(6, 182, 212, 0.25);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,284 +39,367 @@
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
-            padding: 30px 20px;
-            transition: background 0.5s ease;
+            padding: 24px 16px;
+            transition: all 0.4s ease;
+            line-height: 1.6;
         }
         .container {
-            max-width: 800px;
+            max-width: 820px;
             margin: 0 auto;
             background: var(--card-bg);
-            padding: 30px;
-            border-radius: 16px;
-            backdrop-filter: blur(10px);
+            padding: 32px;
+            border-radius: 20px;
+            backdrop-filter: blur(12px);
             box-shadow: var(--shadow);
-            border: 1px solid rgba(255,255,255,0.15);
+            border: 1px solid var(--border);
+            position: relative;
         }
+
+        /* Header */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 28px;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
         }
         .back-btn {
-            background: #9ca3af;
-            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.12);
+            color: var(--text);
             text-decoration: none;
-            padding: 10px 18px;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 0.95em;
-            transition: 0.3s;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
         }
         .back-btn:hover {
-            background: #6b7280;
+            background: var(--accent);
+            color: white;
             transform: translateY(-2px);
+            border-color: transparent;
         }
-        h1 {
-            font-size: 2.4em;
-            font-weight: 600;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .theme-toggle {
-            background: #fbbf24;
-            color: #000;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .theme-toggle:hover { background: #f59e0b; }
+        .back-btn svg { width: 18px; height: 18px; }
 
-        .controls {
-            text-align: center;
-            margin: 20px 0;
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), #67e8f9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        .add-btn {
-            background: #3b82f6;
+
+        .theme-toggle {
+            background: var(--accent);
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 10px;
-            font-size: 1em;
+            padding: 10px 16px;
+            border-radius: 12px;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        .theme-toggle:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Controls */
+        .controls {
+            text-align: center;
+            margin: 24px 0;
+        }
+        .add-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(34, 211, 238, 0.3);
         }
         .add-btn:hover {
-            background: #2563eb;
-            transform: scale(1.05);
+            background: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(34, 211, 238, 0.4);
         }
+        .add-btn svg { width: 20px; height: 20px; }
 
-        .timer {
-            margin: 25px auto;
-            padding: 16px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 12px;
-            font-size: 1.9em;
-            font-weight: bold;
-            max-width: 200px;
-            display: none;
-            border: 2px dashed var(--accent);
-            animation: pulse 1.2s infinite;
-        }
-        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
-
+        /* Exercise Card */
         .exercise {
-            background: rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.06);
             margin: 20px 0;
-            padding: 20px;
-            border-radius: 14px;
+            padding: 22px;
+            border-radius: 16px;
             transition: all 0.3s ease;
             border-left: 5px solid var(--accent);
+            border: 1px solid var(--border-accent);
         }
         .exercise:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.1);
         }
         .exercise h3 {
-            font-size: 1.5em;
-            margin: 0 0 12px 0;
+            font-size: 1.5rem;
+            margin: 0 0 14px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-weight: 600;
         }
         .remove-exercise {
             background: var(--danger);
             color: white;
             border: none;
-            width: 30px;
-            height: 30px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            font-size: 1em;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .remove-exercise:hover { background: #dc2626; transform: scale(1.1); }
+        .remove-exercise:hover {
+            background: var(--danger-hover);
+            transform: scale(1.1);
+        }
 
         .set-controls {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 12px;
-            font-size: 0.9em;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
         }
         .set-btn {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.15);
             color: var(--text);
             border: none;
-            width: 34px;
-            height: 34px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
             font-weight: bold;
-            font-size: 1.1em;
-            transition: 0.3s;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .set-btn:hover {
             background: var(--accent);
             color: white;
+            transform: scale(1.1);
         }
 
         .sets {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         .set {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 12px 18px;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.12);
+            padding: 10px 16px;
+            border-radius: 12px;
             min-width: 90px;
-            transition: all 0.3s;
-            font-weight: 600;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid var(--border);
         }
         .set input[type="checkbox"] {
-            transform: scale(1.5);
-            margin-right: 8px;
+            transform: scale(1.4);
             cursor: pointer;
+            accent-color: var(--accent);
         }
         .set label {
             cursor: pointer;
             user-select: none;
+            font-size: 0.95rem;
         }
         .completed {
             background: var(--accent) !important;
-            animation: celebrate 0.6s;
+            color: white !important;
+            animation: celebrate 0.5s ease;
         }
         @keyframes celebrate {
             0% { transform: scale(1); }
-            50% { transform: scale(1.12); }
+            50% { transform: scale(1.15); }
             100% { transform: scale(1); }
         }
 
         .info {
+            font-size: 0.9rem;
+            color: var(--text-muted);
             font-style: italic;
-            opacity: 0.85;
-            font-size: 0.9em;
-            margin-top: 4px;
+            margin-top: 6px;
+            text-align: center;
         }
 
+        /* Success */
         .success {
             margin: 40px 0;
-            padding: 22px;
-            background: var(--accent);
+            padding: 24px;
+            background: linear-gradient(135deg, var(--accent), #67e8f9);
             color: white;
-            border-radius: 14px;
-            font-size: 1.8em;
-            font-weight: bold;
+            border-radius: 16px;
+            font-size: 1.7rem;
+            font-weight: 700;
+            text-align: center;
             display: none;
-            animation: fadeInUp 1s forwards;
+            animation: fadeInUp 0.8s ease forwards;
+            box-shadow: 0 8px 20px rgba(34, 211, 238, 0.3);
         }
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Reset */
         .reset-btn {
-            display: block;
-            margin: 30px auto 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 32px auto 0;
             padding: 14px 32px;
             background: var(--danger);
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 1.1em;
-            font-weight: bold;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
         .reset-btn:hover {
-            background: #dc2626;
-            transform: translateY(-2px);
+            background: var(--danger-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(239, 68, 68, 0.3);
         }
+        .reset-btn svg { width: 18px; height: 18px; }
 
         /* Modal */
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.75);
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            backdrop-filter: blur(8px);
         }
         .modal-content {
             background: var(--card-bg);
-            padding: 28px;
-            border-radius: 16px;
+            padding: 32px;
+            border-radius: 20px;
             width: 90%;
             max-width: 500px;
             box-shadow: var(--shadow);
+            border: 1px solid var(--border);
         }
         .modal h2 {
             margin-bottom: 20px;
-            font-size: 1.6em;
+            font-size: 1.7rem;
+            font-weight: 600;
+            text-align: center;
         }
         .modal input {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             margin: 10px 0;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            font-size: 1em;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.05);
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .modal input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.2);
+        }
+        .modal input::placeholder {
+            color: var(--text-muted);
         }
         .modal button {
             width: 100%;
-            padding: 12px;
-            margin: 8px 0;
+            padding: 14px;
+            margin: 10px 0 0;
             border: none;
-            border-radius: 8px;
-            font-size: 1em;
-            cursor: pointer;
+            border-radius: 12px;
+            font-size: 1rem;
             font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-        .modal .add-btn { background: #22c55e; color: white; }
-        .modal .add-btn:hover { background: #16a34a; }
-        .modal .close-btn { background: #ef4444; color: white; }
-        .modal .close-btn:hover { background: #dc2626; }
+        .modal .add-btn {
+            background: var(--accent);
+            color: white;
+        }
+        .modal .add-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+        .modal .close-btn {
+            background: var(--danger);
+            color: white;
+        }
+        .modal .close-btn:hover {
+            background: var(--danger-hover);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .header { flex-direction: column; align-items: stretch; }
+            h1 { font-size: 1.9rem; text-align: center; }
+            .exercise { padding: 18px; }
+            .set-controls { font-size: 0.9rem; }
+        }
     </style>
 </head>
 <body data-theme="dark">
 
     <div class="container">
         <div class="header">
-            <a href="landing.html" class="back-btn">Početna</a>
+            <a href="landing.html" class="back-btn">
+                <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"/></svg>
+                Početna
+            </a>
             <h1>Vježbe</h1>
             <button class="theme-toggle" onclick="toggleTheme()">Svijetli način</button>
         </div>
 
         <div class="controls">
-            <button class="add-btn" onclick="openModal()">+ Dodaj vježbu</button>
+            <button class="add-btn" onclick="openModal()">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                Dodaj vježbu
+            </button>
         </div>
-
-        <!-- Timer -->
-        <div id="timer" class="timer">00:30</div>
 
         <!-- Vježbe -->
         <div id="exercises"></div>
@@ -319,24 +410,23 @@
         </div>
 
         <!-- Reset -->
-        <button class="reset-btn" onclick="resetWorkout()">Resetiraj trening</button>
+        <button class="reset-btn" onclick="resetWorkout()">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0L9 4m-4.418 5H9m11 6v5h-.582m-15.356 2A8.001 8.001 0 0115.418 15m0 0L11 20m4.418-5H11"/></svg>
+            Resetiraj trening
+        </button>
     </div>
 
     <!-- Modal -->
     <div id="modal" class="modal">
         <div class="modal-content">
-            <h2>Dodaj vježbu</h2>
+            <h2>Dodaj novu vježbu</h2>
             <input type="text" id="exercise-name" placeholder="Ime vježbe (npr. Zgibovi)">
             <input type="number" id="exercise-reps" placeholder="Ponavljanja (npr. 10)" min="1">
-            <input type="number" id="exercise-sets" placeholder="Početni broj serija" min="1" value="3">
-            <input type="number" id="rest-time" placeholder="Odmor između serija (sekundi)" min="10" value="30">
+            <input type="number" id="exercise-sets" placeholder="Broj serija" min="1" value="3">
             <button class="add-btn" onclick="addExercise()">Dodaj vježbu</button>
             <button class="close-btn" onclick="closeModal()">Odustani</button>
         </div>
     </div>
-
-    <!-- Zvuk -->
-    <audio id="beep" src="data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU" preload="auto"></audio>
 
     <script>
         const defaultExercises = [
@@ -347,8 +437,6 @@
         ];
 
         let exercises = JSON.parse(localStorage.getItem('exercises_vjezbe')) || defaultExercises;
-        let timerInterval = null;
-        const beep = document.getElementById('beep');
 
         function saveExercises() {
             localStorage.setItem('exercises_vjezbe', JSON.stringify(exercises));
@@ -367,7 +455,7 @@
                     </h3>
                     <div class="set-controls">
                         <button class="set-btn" onclick="changeSets(${index}, -1)">−</button>
-                        <span><strong>${ex.sets}</strong> serija</span>
+                        <span><strong>${ex.sets}</strong> serija${ex.sets !== 1 ? '' : ''}</span>
                         <button class="set-btn" onclick="changeSets(${index}, 1)">+</button>
                     </div>
                     <div class="sets">
@@ -399,10 +487,9 @@
             if (checkbox.checked) {
                 checkbox.parentElement.classList.add('completed');
                 localStorage.setItem(id, 'true');
-                const rest = exercises[exIndex].rest || 30;
-                startRestTimer(rest);
             } else {
                 localStorage.removeItem(id);
+                checkbox.parentElement.classList.remove('completed');
             }
             checkProgress();
         }
@@ -423,30 +510,6 @@
                 all.length === checked.length && all.length > 0 ? 'block' : 'none';
         }
 
-        function startRestTimer(seconds) {
-            if (timerInterval) clearInterval(timerInterval);
-            const timerEl = document.getElementById('timer');
-            timerEl.style.display = 'block';
-            let timeLeft = seconds;
-            timerEl.textContent = formatTime(timeLeft);
-
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                timerEl.textContent = formatTime(timeLeft);
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    timerEl.style.display = 'none';
-                    beep.play();
-                }
-            }, 1000);
-        }
-
-        function formatTime(sec) {
-            const m = String(Math.floor(sec / 60)).padStart(2, '0');
-            const s = String(sec % 60).padStart(2, '0');
-            return `${m}:${s}`;
-        }
-
         function openModal() { document.getElementById('modal').style.display = 'flex'; }
         function closeModal() { document.getElementById('modal').style.display = 'none'; }
 
@@ -454,25 +517,22 @@
             const name = document.getElementById('exercise-name').value.trim();
             const reps = parseInt(document.getElementById('exercise-reps').value);
             const sets = parseInt(document.getElementById('exercise-sets').value);
-            const rest = parseInt(document.getElementById('rest-time').value);
 
             if (!name || isNaN(reps) || isNaN(sets)) {
-                alert("Popuni sva polja!");
+                alert("Popuni sva obavezna polja!");
                 return;
             }
 
             exercises.push({ 
-                name, reps, sets, rest: rest || 30, 
-                unit: reps === 1 ? "ponavljanje" : "ponavljanja" 
+                name, reps, sets, 
+                unit: reps === 1 ? "ponavljanje" : (reps >= 5 ? "ponavljanja" : "ponavljanja")
             });
             saveExercises();
             closeModal();
             renderExercises();
-            // Reset forme
             document.getElementById('exercise-name').value = '';
             document.getElementById('exercise-reps').value = '';
             document.getElementById('exercise-sets').value = '3';
-            document.getElementById('rest-time').value = '30';
         }
 
         function removeExercise(index) {
@@ -484,7 +544,7 @@
         }
 
         function resetWorkout() {
-            if (confirm("Resetirati cijeli trening?")) {
+            if (confirm("Resetirati cijeli trening? Svi podaci će biti izgubljeni.")) {
                 localStorage.removeItem('exercises_vjezbe');
                 Object.keys(localStorage).forEach(key => {
                     if (key.startsWith('vjezba-')) localStorage.removeItem(key);
