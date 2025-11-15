@@ -5,51 +5,138 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kinesiology is Science</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --bg: #0a0e17;
+      --text: #f0f4fa;
+      --primary: #00d4aa;
+      --accent: #1e90ff;
+      --card-bg: rgba(255, 255, 255, 0.06);
+      --card-hover: rgba(0, 212, 170, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      background-color: #0f1724;
-      color: #e6eef8;
-      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, var(--bg) 0%, #0f1a2e 100%);
+      color: var(--text);
+      font-family: 'Inter', Arial, sans-serif;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      margin: 0;
+      padding: 2rem;
       text-align: center;
+      overflow-x: hidden;
     }
-    h1 { font-size: 3em; margin-bottom: 10px; }
-    p { font-size: 1.2em; margin-bottom: 40px; max-width: 600px; }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #00d4aa, #1e90ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    p {
+      font-size: 1.25rem;
+      line-height: 1.7;
+      color: #b0c4de;
+      margin-bottom: 3rem;
+      max-width: 620px;
+    }
+
     .menu {
       display: flex;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 1.5rem;
       justify-content: center;
     }
+
     .menu a {
       text-decoration: none;
-      color: #0f1724;
-      background-color: #e6eef8;
-      padding: 15px 25px;
-      border-radius: 12px;
-      font-weight: bold;
-      font-size: 1.1em;
-      transition: transform 0.2s, background-color 0.3s;
+      color: white;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      padding: 1.2rem 2rem;
+      border-radius: 16px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 212, 170, 0.2);
+      min-width: 140px;
+      position: relative;
+      overflow: hidden;
     }
+
+    .menu a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: 0.5s;
+    }
+
+    .menu a:hover::before {
+      left: 100%;
+    }
+
     .menu a:hover {
-      background-color: #c0d8ff;
-      transform: scale(1.05);
+      background: var(--card-hover);
+      border-color: var(--primary);
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 10px 25px rgba(0, 212, 170, 0.2);
+    }
+
+    .menu a:active {
+      transform: translateY(-2px) scale(1.01);
+    }
+
+    /* Responsivnost */
+    @media (max-width: 640px) {
+      h1 { font-size: 2.5rem; }
+      p { font-size: 1.1rem; }
+      .menu a { padding: 1rem 1.5rem; font-size: 1rem; }
+    }
+
+    /* Subtle animation on load */
+    .container {
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <h1>Kinesiology is Science</h1>
-  <p>Dobrodošli! Kliknite na temu ispod kako biste učili o tijelu, mišićima, vježbama i zanimljivostima.</p>
-  <div class="menu">
-    <a href="vjezbe.html">Vježbe</a>
-    <a href="kvizovi/index.html">Kvizovi</a>
-    <a href="funfacts.html">Fun facts</a>
+  <div class="container">
+    <h1>Kinesiology is Science</h1>
+    <p>Dobrodošli! Kliknite na temu ispod kako biste učili o tijelu, mišićima, vježbama i zanimljivostima.</p>
+    <div class="menu">
+      <a href="vjezbe.html">Vježbe</a>
+      <a href="kvizovi/index.html">Kvizovi</a>
+      <a href="funfacts.html">Fun facts</a>
+    </div>
   </div>
 </body>
 </html>
