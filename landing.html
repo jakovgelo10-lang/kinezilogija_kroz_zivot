@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kinesiology is Science</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0e17;
+      --card: rgba(255, 255, 255, 0.06);
+      --text: #f0f4fa;
+      --text-muted: #a0b4cc;
+      --primary: #00d4aa;
+      --accent: #1e90ff;
+      --glow: rgba(0, 212, 170, 0.3);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0a0e17 0%, #0f1a2e 70%, #112240 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Pozadinski sjaj */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at 30% 70%, rgba(0, 212, 170, 0.15), transparent 50%),
+                  radial-gradient(circle at 70% 30%, rgba(30, 144, 255, 0.15), transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      text-align: center;
+      animation: fadeInUp 1.2s ease-out;
+    }
+
+    .logo {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 1.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      box-shadow: 0 0 40px var(--glow);
+      animation: pulse 4s infinite;
+    }
+
+    h1 {
+      font-size: 3.8rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #00d4aa, #1e90ff, #00d4aa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.8rem;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+    }
+
+    .subtitle {
+      font-size: 1.35rem;
+      color: var(--text-muted);
+      margin-bottom: 3.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.8rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: white;
+      background: var(--card);
+      backdrop-filter: blur(12px);
+      padding: 1.8rem 1.5rem;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 1.25rem;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1.5px solid rgba(0, 212, 170, 0.25);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .menu a::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+      transition: 0.7s;
+    }
+
+    .menu a:hover::before {
+      left: 100%;
+    }
+
+    .menu a:hover {
+      transform: translateY(-10px) scale(1.05);
+      background: rgba(0, 212, 170, 0.18);
+      border-color: var(--primary);
+      box-shadow: 0 20px 40px rgba(0, 212, 170, 0.3);
+    }
+
+    .menu a:active {
+      transform: translateY(-6px) scale(1.03);
+    }
+
+    .menu a span {
+      display: block;
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Animacije */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 40px var(--glow); }
+      50% { box-shadow: 0 0 60px rgba(0, 212, 170, 0.5); }
+    }
+
+    /* Mobitel */
+    @media (max-width: 768px) {
+      h1 { font-size: 2.8rem; }
+      .subtitle { font-size: 1.2rem; }
+      .logo { width: 80px; height: 80px; font-size: 2.5rem; }
+      .menu { grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+      .menu a { padding: 1.5rem 1rem; font-size: 1.1rem; }
+      .menu a span { font-size: 2.4rem; }
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 2.4rem; }
+      .menu { grid-template-columns: 1fr; }
+      .menu a span { font-size: 2.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="logo">💪</div>
+    
+    <h1>Kinesiology<br>is Science</h1>
+    <p class="subtitle">
+      Učite o tijelu, mišićima, pravilnim vježbama i prehrani na zabavan i znanstveni način.
+    </p>
+
+    <div class="menu">
+  <a href="vjezbe.html">
+    <span>🏋️‍♂️</span>
+    Vježbe
+  </a>
+  <a href="kvizovi/index.html">
+    <span>❓</span>
+    Kvizovi
+  </a>
+  <a href="funfacts/index1.html">
+    <span>✨</span>
+    Fun Facts
+  </a>
+  <a href="prehrana.html">
+    <span>🍏</span>
+    Prehrana
+  </a>
+</div>
+
+  </div>
+
+</body>
+</html>
