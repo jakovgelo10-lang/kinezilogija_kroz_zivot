@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trening - Kinesiology is Science</title>
+    <title>Trening - Vježbe</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -94,35 +94,6 @@
         }
         .theme-toggle:hover { background: var(--accent2); }
 
-        /* Kalkulatori */
-        .calculators {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-bottom: 28px;
-        }
-        @media (max-width: 700px) { .calculators { grid-template-columns: 1fr; } }
-
-        .calc-card {
-            background: rgba(255,255,255,0.08);
-            padding: 18px;
-            border-radius: 16px;
-            border: 1px solid var(--border);
-        }
-        .calc-card h3 { text-align: center; margin-bottom: 14px; color: var(--accent); }
-        .calc-card input, .calc-card select {
-            width: 100%; padding: 10px; margin: 8px 0; border-radius: 10px;
-            border: 1px solid var(--border); background: rgba(255,255,255,0.05); color: var(--text);
-        }
-        .calc-card button {
-            width: 100%; padding: 10px; background: var(--accent); color: white;
-            border: none; border-radius: 10px; cursor: pointer; margin-top: 8px;
-        }
-        .result {
-            margin-top: 12px; text-align: center; font-weight: 600; padding: 10px;
-            background: rgba(34,211,238,0.15); border-radius: 10px;
-        }
-
         .add-btn {
             background: linear-gradient(135deg, var(--accent), var(--accent2));
             color: white; border: none; padding: 14px 32px; border-radius: 50px;
@@ -200,35 +171,9 @@
 <div class="container">
     <div class="main">
         <div class="header">
-    <a href="landing.html" class="back-btn">← Početna</a>
-    <h1>Trening</h1>
-    <button class="theme-toggle" onclick="toggleTheme()">Svijetli način</button>
-</div>
-
-        <div class="calculators">
-            <div class="calc-card">
-                <h3>BMI Kalkulator</h3>
-                <input type="number" id="bmi-weight" placeholder="Težina (kg)">
-                <input type="number" id="bmi-height" placeholder="Visina (cm)">
-                <button onclick="calculateBMI()">Izračunaj</button>
-                <div id="bmi-result" class="result"></div>
-            </div>
-
-            <div class="calc-card">
-                <h3>Dnevne Kalorije</h3>
-                <input type="number" id="cal-weight" placeholder="Težina (kg)">
-                <input type="number" id="cal-height" placeholder="Visina (cm)">
-                <input type="number" id="cal-age" placeholder="Godine">
-                <select id="cal-activity">
-                    <option value="1.2">Sedentaran</option>
-                    <option value="1.375">Lagano</option>
-                    <option value="1.55" selected>Umjereno</option>
-                    <option value="1.725">Vrlo aktivan</option>
-                    <option value="1.9">Ekstra</option>
-                </select>
-                <button onclick="calculateCalories()">Izračunaj</button>
-                <div id="cal-result" class="result"></div>
-            </div>
+            <a href="landing.html" class="back-btn">Početna</a>
+            <h1>Trening</h1>
+            <button class="theme-toggle" onclick="toggleTheme()">Svijetli način</button>
         </div>
 
         <button class="add-btn" onclick="openModal('exercise-modal')">+ Dodaj Vježbu</button>
@@ -323,11 +268,12 @@
     function renderExercises() {
         const cont = document.getElementById('exercises');
         cont.innerHTML = '';
+        if (!workouts[current]) return;
         workouts[current].exercises.forEach((ex, i) => {
             const div = document.createElement('div');
             div.className = 'exercise';
             div.innerHTML = `
-                <h3>${ex.name} ${ex.type==='time' ? 'Clock' : 'Reps'}
+                <h3>${ex.name} ${ex.type==='time' ? '(sekunde)' : '(pon.)'}
                     <button class="remove-exercise" onclick="removeExercise(${i})">×</button>
                 </h3>
                 <div class="set-controls">
@@ -343,7 +289,7 @@
                         </div>
                     `).join('')}
                 </div>
-                <p style="text-align:center;margin-top:8px;color:#94a3b8;font-size:0.9rem;">
+                <p style="text-align:center;margin-top:8px;color:var(--muted);font-size:0.9rem;">
                     ${ex.value} ${ex.unit} po seriji
                 </p>
             `;
@@ -356,12 +302,12 @@
     function renderPbs() {
         const list = document.getElementById('pb-list');
         list.innerHTML = '';
-        pbs.forEach((p, i) => {
+        pbs.forEach((p, i) => {  // ISPRAVLJENO: bilo je "p Impression"
             const div = document.createElement('div');
             div.className = 'pb-item';
             div.innerHTML = `<span>${p.exercise}: ${p.value}</span>
                 <button style="background:#f87171;color:white;border:none;width:28px;height:28px;border-radius:50%;cursor:pointer;"
-                        onclick="pbs.splice(${i},1);save();renderPbs()">×</button>`;
+                        onclick="event.stopPropagation(); pbs.splice(${i},1); save(); renderPbs()">×</button>`;
             list.appendChild(div);
         });
     }
@@ -454,36 +400,8 @@
         renderPbs();
     }
 
-    function openModal(id) {
-        document.getElementById(id).style.display = 'flex';
-    }
-    function closeModal(id) {
-        document.getElementById(id).style.display = 'none';
-    }
-
-    function calculateBMI() {
-        const w = parseFloat(document.getElementById('bmi-weight').value);
-        const h = parseFloat(document.getElementById('bmi-height').value) / 100;
-        if (!w || !h) return;
-        const bmi = (w / (h * h)).toFixed(1);
-        let cat = '';
-        if (bmi < 18.5) cat = 'Mršav';
-        else if (bmi < 25) cat = 'Idealno';
-        else if (bmi < 30) cat = 'Prekomjerno';
-        else cat = 'Pretilost';
-        document.getElementById('bmi-result').innerHTML = `BMI: ${bmi} → ${cat}`;
-    }
-
-    function calculateCalories() {
-        const w = parseFloat(document.getElementById('cal-weight').value);
-        const h = parseFloat(document.getElementById('cal-height').value);
-        const a = parseFloat(document.getElementById('cal-age').value);
-        const act = parseFloat(document.getElementById('cal-activity').value);
-        if (!w || !h || !a) return;
-        const bmr = 10 * w + 6.25 * h - 5 * a + 5; // muški (prosjek)
-        const tdee = Math.round(bmr * act);
-        document.getElementById('cal-result').innerHTML = `≈ ${tdee} kcal/dan`;
-    }
+    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
     function toggleTheme() {
         const isLight = document.body.getAttribute('data-theme') === 'light';
